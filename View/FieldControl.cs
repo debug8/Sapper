@@ -16,9 +16,9 @@ namespace View
         public event EventHandler<MineFieldEventArgs> MineButtonPressed;
         public event EventHandler<MineFieldEventArgs> MineButtonRightPressed;
 
-        private readonly byte fieldSize;
-        private const int ButtonSize = 25;
-        private FieldButton [,] fieldArray;
+        private const int ButtonSize = 16;
+        private readonly byte fieldSize;      
+        private FieldButton [,] fieldArray;       
 
         public FieldControl() : this(10)
         {
@@ -41,8 +41,6 @@ namespace View
 
             element.Text = text;
             element.BackColor = color ;
-            //Refresh();
-            //Thread.Sleep(20);// для отладки алгоритма прохождения клеток
         }
 
         private void FillMineField(byte fieldSize)
@@ -51,7 +49,7 @@ namespace View
             {
                 for (byte j = 0; j < fieldSize; j++)
                 {
-                    var b = CreateFieldButton(j, i);
+                    var b = new FieldButton(i, j);
                     b.Location = new System.Drawing.Point(ButtonSize * i, ButtonSize * j);
                     b.Click += b_Click;
                     b.MouseDown += b_MouseDown;
@@ -76,21 +74,7 @@ namespace View
             if (MineButtonPressed != null)
                 MineButtonPressed(this, new MineFieldEventArgs(button.Row, button.Column));
 
-        }
-
-        private FieldButton CreateFieldButton(byte row, byte column)
-        {
-            var button = new FieldButton(row, column);
-            SuspendLayout();
-
-            button.Location = new System.Drawing.Point(0, 0);
-            button.Margin = new System.Windows.Forms.Padding(0);
-
-            button.Size = new System.Drawing.Size(ButtonSize, ButtonSize);
-            button.UseVisualStyleBackColor = true;
-
-            return button;
-        }
+        }       
 
         public void Reset()
         {

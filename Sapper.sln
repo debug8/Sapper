@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Controller.csproj", "{C251655A-820F-40D5-BA27-F9ABA8B3D8FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "model\Model.csproj", "{1DB3816F-D098-4B83-A625-D9912A5318F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{1DB3816F-D098-4B83-A625-D9912A5318F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{1B82AD31-9D65-415E-9873-D58CDBD3848B}"
 EndProject
