@@ -36,14 +36,6 @@ namespace View
             Size = new System.Drawing.Size(ButtonSize * fieldSize, ButtonSize * fieldSize);
         }
 
-        public void SetFieldElement(byte row, byte column, string text, Color color)
-        {
-            var element = Controls.OfType<FieldButton>().Where(b => b.Row == row && b.Column == column).First();
-
-            element.Text = text;
-            element.BackColor = color ;
-        }
-
         private void FillMineField(byte fieldSize)
         {
             for (byte i = 0; i < fieldSize; i++)
@@ -79,17 +71,7 @@ namespace View
 
         public void Reset()
         {
-            for (byte i = 0; i < fieldSize; i++)
-            {
-                for (byte j = 0; j < fieldSize; j++)
-                {
-                    Controls.OfType<FieldButton>().ToList().ForEach(control => 
-                    {
-                        control.BackColor = Color.FromKnownColor(KnownColor.Control);
-                        control.Text = string.Empty;
-                    });
-                }
-            }
+            Controls.OfType<FieldButton>().ToList().ForEach(element => element.SetStatus(FieldElementStatus.Active));
         }
 
         public void SetElementStatus(int row, int column, FieldElementStatus status)
