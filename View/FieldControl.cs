@@ -92,12 +92,18 @@ namespace View
             }
         }
 
-
-        public void SetElementStatus(byte row, byte column, FieldElementStatus status)
+        public void SetElementStatus(int row, int column, FieldElementStatus status)
         {
             var element = Controls.OfType<FieldButton>().Where(b => b.Row == row && b.Column == column).First();
 
             element.SetStatus(status);
+        }
+
+        public FieldElementStatus GetElementStatus(int row, int column)
+        {
+            var element = Controls.OfType<FieldButton>().Where(b => b.Row == row && b.Column == column).First();
+
+            return element.Status;
         }
     }
 }

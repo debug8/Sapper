@@ -39,7 +39,7 @@ namespace Controller
 
         void view_MineButtonRightPressed(object sender, MineFieldEventArgs e)
         {
-            view.SetElementStatus(e.Row, e.Column, FieldElementStatus.BombFlagged); ///// один раз только
+            view.SetElementStatus(e.Row, e.Column, FieldElementStatus.BombFlagged); 
         }
 
         void view_MineButtonPressed(object sender, MineFieldEventArgs e)
@@ -56,35 +56,29 @@ namespace Controller
                 return;
                 case 1: 
                     view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open1);
-                return;
-
+                    return;
                 case 2: 
                     view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open2);
-                return;
+                    return;
                 case 3: 
                     view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open3);
-                return;
+                    return;
                 case 4: 
                     view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open4);
-                return;
+                    return;
                 case 5: 
                     view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open5);
-                return;
+                    return;
                 case 6:
                     view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open6);
-                return;
+                    return;
                 case 7:
                     view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open7);
-                return;
+                    return;
                 case 8:
                     view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open0);
-                return;
+                    return;
             }
-            
-            var color = e.HasMine ? Color.Red : Color.SpringGreen;
-            var text = e.HasMine ? "X" : e.MineAround == 0 ? "" : e.MineAround.ToString();
-
-            view.SetFieldElement(e.Row, e.Column, text, color);
         }
 
         void model_Loose(object sender, EventArgs e)

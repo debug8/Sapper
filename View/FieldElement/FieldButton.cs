@@ -14,6 +14,8 @@ namespace View.FieldElement
         private const int ButtonSize = 16;
         private FieldElementStatus status;
 
+        internal FieldElementStatus Status { get { return status; } }
+
         internal FieldButton(byte row, byte column)
         {
             this.row = row;
@@ -22,16 +24,7 @@ namespace View.FieldElement
             Initialize();
             SetStatus(FieldElementStatus.Active);
         }
-
-        private void Initialize()
-        {
-            SetStyle(ControlStyles.Selectable, false);
-            Size = new System.Drawing.Size(ButtonSize, ButtonSize);
-            TabStop = false;
-            FlatStyle = FlatStyle.Flat;
-            FlatAppearance.BorderSize = 0;
-        }
-
+      
         internal void SetStatus(FieldElementStatus status) 
         {
             this.status = status;
@@ -96,6 +89,15 @@ namespace View.FieldElement
         internal byte Column
         {
             get { return column; }
+        }
+
+        private void Initialize()
+        {
+            SetStyle(ControlStyles.Selectable, false);
+            Size = new System.Drawing.Size(ButtonSize, ButtonSize);
+            TabStop = false;
+            FlatStyle = FlatStyle.Flat;
+            FlatAppearance.BorderSize = 0;
         }
     }
 }

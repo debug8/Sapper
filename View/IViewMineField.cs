@@ -7,8 +7,8 @@ namespace View
         event EventHandler<MineFieldEventArgs> MineButtonPressed;
         event EventHandler<MineFieldEventArgs> MineButtonRightPressed;
 
-        void SetFieldElement(byte row, byte column, string text, Color col);
-        void SetElementStatus(byte row, byte column, FieldElementStatus status);
+        void SetElementStatus(int row, int column, FieldElementStatus status);
+        FieldElementStatus GetElementStatus(int row, int column);
         void Reset();
     }
 }
