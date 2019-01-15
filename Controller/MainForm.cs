@@ -57,6 +57,12 @@ namespace Controller
         public void Reset()
         {
             fieldControl.Reset();
-        }        
+        }
+
+
+        public void SetElementStatus(byte row, byte column, FieldElementStatus status)
+        {
+            fieldControl.SetElementStatus(row, column, status);
+        }
     }
 }

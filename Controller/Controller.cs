@@ -39,7 +39,7 @@ namespace Controller
 
         void view_MineButtonRightPressed(object sender, MineFieldEventArgs e)
         {
-            view.SetFieldElement(e.Row, e.Column, "✔", Color.Orange);
+            view.SetElementStatus(e.Row, e.Column, FieldElementStatus.BombFlagged); ///// один раз только
         }
 
         void view_MineButtonPressed(object sender, MineFieldEventArgs e)
@@ -49,6 +49,38 @@ namespace Controller
 
         void model_ElementChanged(object sender, ElementEventArgs e)
         {
+            switch (e.MineAround)
+            {
+                case 0:
+                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open0);
+                return;
+                case 1: 
+                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open1);
+                return;
+
+                case 2: 
+                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open2);
+                return;
+                case 3: 
+                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open3);
+                return;
+                case 4: 
+                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open4);
+                return;
+                case 5: 
+                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open5);
+                return;
+                case 6:
+                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open6);
+                return;
+                case 7:
+                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open7);
+                return;
+                case 8:
+                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open0);
+                return;
+            }
+            
             var color = e.HasMine ? Color.Red : Color.SpringGreen;
             var text = e.HasMine ? "X" : e.MineAround == 0 ? "" : e.MineAround.ToString();
 

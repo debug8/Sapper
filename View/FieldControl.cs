@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using View.FieldElement;
 
 namespace View
 {
@@ -89,6 +90,14 @@ namespace View
                     });
                 }
             }
+        }
+
+
+        public void SetElementStatus(byte row, byte column, FieldElementStatus status)
+        {
+            var element = Controls.OfType<FieldButton>().Where(b => b.Row == row && b.Column == column).First();
+
+            element.SetStatus(status);
         }
     }
 }

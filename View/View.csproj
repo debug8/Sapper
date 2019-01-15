@@ -47,20 +47,59 @@
     <Compile Include="FieldControl.Designer.cs">
       <DependentUpon>FieldControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="FieldElementStatus.cs" />
+    <Compile Include="FieldElement\FieldButtonResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FieldButtonResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="IViewMineField.cs" />
-    <Compile Include="FieldButton.cs">
+    <Compile Include="FieldElement\FieldButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MineFieldEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\ButtonPressed.gif">
+    <Content Include="FieldElement\FieldButtonResources\buttonFlagged.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\buttonUnpressed.gif">
+    <Content Include="FieldElement\FieldButtonResources\buttonOpen1.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="FieldElement\FieldButtonResources\buttonOpen2.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FieldElement\FieldButtonResources\buttonOpen3.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FieldElement\FieldButtonResources\buttonOpen4.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FieldElement\FieldButtonResources\buttonOpen5.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FieldElement\FieldButtonResources\buttonOpen6.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FieldElement\FieldButtonResources\buttonOpen7.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FieldElement\FieldButtonResources\buttonOpen8.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FieldElement\FieldButtonResources\buttonPressed.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FieldElement\FieldButtonResources\buttonUnpressed.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FieldElement\FieldButtonResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FieldButtonResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
