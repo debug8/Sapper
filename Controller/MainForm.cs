@@ -28,11 +28,6 @@ namespace Controller
 
         public event Action ResetForm;
 
-        public void SetFieldElement(byte row, byte column, string text, Color col)
-        {
-            fieldControl.SetFieldElement(row, column, text, col);
-        }
-
         private void OnMineButtonPressed(object o, MineFieldEventArgs e) 
         {
             if (MineButtonPressed != null)

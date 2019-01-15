@@ -39,11 +39,26 @@ namespace Controller
 
         void view_MineButtonRightPressed(object sender, MineFieldEventArgs e)
         {
-            view.SetElementStatus(e.Row, e.Column, FieldElementStatus.BombFlagged); 
+            var status = view.GetElementStatus(e.Row, e.Column);
+            if (status == FieldElementStatus.Active)
+            {
+                view.SetElementStatus(e.Row, e.Column, FieldElementStatus.BombFlagged);
+                return;
+            }
+            if (status == FieldElementStatus.BombFlagged) 
+            {
+                view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Active);
+            }
         }
 
         void view_MineButtonPressed(object sender, MineFieldEventArgs e)
         {
+            var status = view.GetElementStatus(e.Row, e.Column);
+            if (status == FieldElementStatus.BombFlagged)
+            {
+                return;
+            }
+
             model.OpenElement(e.Row, e.Column);
         }
 
@@ -76,7 +91,7 @@ namespace Controller
                     view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open7);
                     return;
                 case 8:
-                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open0);
+                    view.SetElementStatus(e.Row, e.Column, FieldElementStatus.Open8);
                     return;
             }
         }
