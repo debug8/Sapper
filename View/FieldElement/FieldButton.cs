@@ -60,6 +60,15 @@ namespace View.FieldElement
                 case FieldElementStatus.BombFlagged:
                     BackgroundImage = FieldButtonResources.buttonFlagged;
                     return;
+                case FieldElementStatus.BombRevealed:
+                    BackgroundImage = FieldButtonResources.bombRevealed;
+                    return;
+                case FieldElementStatus.BombDeath:
+                    BackgroundImage = FieldButtonResources.bombDeath;
+                    return;
+                case FieldElementStatus.BombMisFlagged:
+                    BackgroundImage = FieldButtonResources.bombMisFlagged;
+                    return;
 
                 case FieldElementStatus.Active:
                     BackgroundImage = FieldButtonResources.buttonUnpressed;

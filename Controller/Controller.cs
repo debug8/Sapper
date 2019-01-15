@@ -64,6 +64,11 @@ namespace Controller
 
         void model_ElementChanged(object sender, ElementEventArgs e)
         {
+            if (e.HasMine) 
+            {
+                view.SetElementStatus(e.Row, e.Column, FieldElementStatus.BombRevealed);
+                return;
+            }
             switch (e.MineAround)
             {
                 case 0:
