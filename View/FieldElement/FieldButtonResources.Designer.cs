@@ -63,6 +63,36 @@ namespace View.FieldElement {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bombDeath {
+            get {
+                object obj = ResourceManager.GetObject("bombDeath", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bombMisFlagged {
+            get {
+                object obj = ResourceManager.GetObject("bombMisFlagged", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bombRevealed {
+            get {
+                object obj = ResourceManager.GetObject("bombRevealed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap buttonFlagged {
             get {
                 object obj = ResourceManager.GetObject("buttonFlagged", resourceCulture);

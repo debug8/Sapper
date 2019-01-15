@@ -61,6 +61,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FieldElement\FieldButtonResources\bombDeath.gif" />
+    <Content Include="FieldElement\FieldButtonResources\bombMisFlagged.gif" />
+    <Content Include="FieldElement\FieldButtonResources\bombRevealed.gif" />
     <Content Include="FieldElement\FieldButtonResources\buttonFlagged.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
