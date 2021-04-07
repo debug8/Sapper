@@ -10,16 +10,16 @@ namespace model
     public class MineField : IModelMineField 
     {
         private FieldElement[,] field;
-        private byte fieldSize;
+        private int fieldSize;
         private float persentMines;
 
         public event EventHandler Loose;
         public event EventHandler Win;
         public event EventHandler<ElementEventArgs> ElementChanged;
 
-        public MineField(byte fieldSize) : this(fieldSize, 0.15f) { }
+        public MineField(int fieldSize) : this(fieldSize, 0.15f) { }
 
-        public MineField(byte fieldSize, float persentMines) 
+        public MineField(int fieldSize, float persentMines) 
         {
             if (fieldSize < 5 || fieldSize > 100) throw new ArgumentOutOfRangeException("fieldSize", "must be 5 < fieldSize < 100");
             this.fieldSize = fieldSize;
@@ -29,7 +29,7 @@ namespace model
             this.persentMines = persentMines;
         }
 
-        public void OpenElement(byte row, byte column)
+        public void OpenElement(int row, int column)
         {
             if (row >= fieldSize && column >= fieldSize)   
                 throw new ArgumentOutOfRangeException("row and column can't be more than fieldSize");
@@ -84,7 +84,7 @@ namespace model
                     {                       
                         if (!field[i, j].isOpen && ElementChanged != null)
                         {
-                            ElementChanged(this, new ElementEventArgs((byte)i, (byte)j, false, MineCountAround(i, j)));
+                            ElementChanged(this, new ElementEventArgs((int)i, (int)j, false, MineCountAround(i, j)));
                         }
 
                       field[i, j].isOpen = true;
@@ -94,7 +94,7 @@ namespace model
 
             if (ElementChanged != null)
             {
-                ElementChanged(this, new ElementEventArgs((byte)row, (byte)column, false, MineCountAround(row, column)));
+                ElementChanged(this, new ElementEventArgs((int)row, (int)column, false, MineCountAround(row, column)));
             }
         }
 
@@ -119,15 +119,15 @@ namespace model
             }
         }
 
-        private void OpenMines(byte i, byte j) 
+        private void OpenMines(int i, int j) 
         {
             if (field[i, j].hasMine)
                 ElementChanged(this, new ElementEventArgs(i, j, true, 0));
         }       
 
-        private byte MineCountAround(int row, int column) 
+        private int MineCountAround(int row, int column) 
         {   
-            byte res = 0;
+            int res = 0;
 
             var rowMin = row == 0 ? 0 : -1;
             var rowMax = row == fieldSize - 1 ? 0 : 1;
@@ -146,14 +146,14 @@ namespace model
             return res;
         }
 
-        private void InitializeField(byte firstClickRow, byte firstClickColumn) 
+        private void InitializeField(int firstClickRow, int firstClickColumn) 
         {
             EnumerateArray((i, j) => field[i, j] = new FieldElement());
 
             SetMines(firstClickRow, firstClickColumn);
         }
 
-        private void SetMines(byte firstClickRow, byte firstClickColumn) 
+        private void SetMines(int firstClickRow, int firstClickColumn) 
         {
             int amt = (int)(fieldSize * fieldSize * persentMines);
             Random r = new Random();
@@ -170,11 +170,11 @@ namespace model
             }
         }
 
-        private void EnumerateArray(Action<byte, byte> action) 
+        private void EnumerateArray(Action<int, int> action) 
         {
-            for (byte i = 0; i < fieldSize; i++)
+            for (int i = 0; i < fieldSize; i++)
             {
-                for (byte j = 0; j < fieldSize; j++)
+                for (int j = 0; j < fieldSize; j++)
                 {
                     action(i, j);
                 }

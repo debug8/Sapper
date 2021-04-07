@@ -8,12 +8,12 @@ namespace model
 {
     public class ElementEventArgs
     {
-        byte row;
-        byte column;
+        int row;
+        int column;
         bool hasMine;
-        byte mineAround;
+        int mineAround;
 
-        internal ElementEventArgs(byte row, byte column, bool hasMine, byte mineAround) 
+        internal ElementEventArgs(int row, int column, bool hasMine, int mineAround) 
         {
             this.row = row;
             this.column = column;
@@ -21,9 +21,9 @@ namespace model
             this.mineAround = mineAround;
         }
 
-        public byte Row { get { return row; } }
-        public byte Column { get { return column; } }
+        public int Row { get { return row; } }
+        public int Column { get { return column; } }
         public bool HasMine { get { return hasMine; } }
-        public byte MineAround { get { return mineAround; } }
+        public int MineAround { get { return mineAround; } }
     }
 }

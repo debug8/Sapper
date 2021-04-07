@@ -7,7 +7,7 @@ namespace model
         event EventHandler Win;
         event EventHandler<ElementEventArgs> ElementChanged;
 
-        void OpenElement(byte row, byte column);
+        void OpenElement(int row, int column);
         void Reset();
     }
 }

@@ -18,15 +18,15 @@ namespace model
 
             obj.SetField("field", CreateTestArray0Mine());
             var mine = obj.Invoke("MineCountAround", new object[]{0, 0});
-            Assert.AreEqual<byte>(0, (byte)mine);
+            Assert.AreEqual(0, (int)mine);
 
             obj.SetField("field", CreateTestArray3Mine());
             mine = obj.Invoke("MineCountAround", new object[] { 0, 0 });
-            Assert.AreEqual<byte>(3, (byte)mine);
+            Assert.AreEqual(3, (int)mine);
 
             obj.SetField("field", CreateTestArray3MineApper());
             mine = obj.Invoke("MineCountAround", new object[] { 1, 1 });
-            Assert.AreEqual<byte>(3, (byte)mine);
+            Assert.AreEqual(3, (int)mine);
         }
 
         [TestMethod]
@@ -37,28 +37,28 @@ namespace model
 
             obj.SetField("field", CreateBigTestArray());
             var mine = obj.Invoke("MineCountAround", new object[] { 2, 2 });
-            Assert.AreEqual<byte>(8, (byte)mine);
+            Assert.AreEqual(8, (int)mine);
 
             mine = obj.Invoke("MineCountAround", new object[] { 0, 0 });
-            Assert.AreEqual<byte>(1, (byte)mine);
+            Assert.AreEqual(1, (int)mine);
 
             mine = obj.Invoke("MineCountAround", new object[] { 0, 1 });
-            Assert.AreEqual<byte>(2, (byte)mine);
+            Assert.AreEqual(2, (int)mine);
 
             mine = obj.Invoke("MineCountAround", new object[] { 0, 2 });
-            Assert.AreEqual<byte>(3, (byte)mine);
+            Assert.AreEqual(3, (int)mine);
 
             mine = obj.Invoke("MineCountAround", new object[] { 1, 2 });
-            Assert.AreEqual<byte>(4, (byte)mine);
+            Assert.AreEqual(4, (int)mine);
 
             mine = obj.Invoke("MineCountAround", new object[] { 4, 4 });
-            Assert.AreEqual<byte>(1, (byte)mine);
+            Assert.AreEqual(1, (int)mine);
 
             mine = obj.Invoke("MineCountAround", new object[] { 3, 3 });
-            Assert.AreEqual<byte>(2, (byte)mine);
+            Assert.AreEqual(2, (int)mine);
 
             mine = obj.Invoke("MineCountAround", new object[] { 3, 2 });
-            Assert.AreEqual<byte>(4, (byte)mine);
+            Assert.AreEqual(4, (int)mine);
         }
         #region Arr1
         private FieldElement[,] CreateTestArray3Mine() 
