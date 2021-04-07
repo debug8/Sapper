@@ -1,9 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace model
 {
@@ -66,9 +61,9 @@ namespace model
             var arr = new FieldElement[2, 2];
 
             arr[0, 0] = new FieldElement();
-            arr[0, 1] = new FieldElement() { hasMine = true};
-            arr[1, 0] = new FieldElement() { hasMine = true };
-            arr[1, 1] = new FieldElement() { hasMine = true };
+            arr[0, 1] = new FieldElement() { HasMine = true};
+            arr[1, 0] = new FieldElement() { HasMine = true };
+            arr[1, 1] = new FieldElement() { HasMine = true };
 
             return arr;
         }
@@ -89,9 +84,9 @@ namespace model
         {
             var arr = new FieldElement[2, 2];
 
-            arr[0, 0] = new FieldElement() { hasMine = true }; 
-            arr[0, 1] = new FieldElement() { hasMine = true };
-            arr[1, 0] = new FieldElement() { hasMine = true };
+            arr[0, 0] = new FieldElement() { HasMine = true }; 
+            arr[0, 1] = new FieldElement() { HasMine = true };
+            arr[1, 0] = new FieldElement() { HasMine = true };
             arr[1, 1] = new FieldElement();
 
             return arr;
@@ -110,21 +105,21 @@ namespace model
             arr[0, 4] = new FieldElement();
 
             arr[1, 0] = new FieldElement();
-            arr[1, 1] = new FieldElement() { hasMine = true };
-            arr[1, 2] = new FieldElement() { hasMine = true };
-            arr[1, 3] = new FieldElement() { hasMine = true };
+            arr[1, 1] = new FieldElement() { HasMine = true };
+            arr[1, 2] = new FieldElement() { HasMine = true };
+            arr[1, 3] = new FieldElement() { HasMine = true };
             arr[1, 4] = new FieldElement();
 
             arr[2, 0] = new FieldElement();
-            arr[2, 1] = new FieldElement() { hasMine = true };
+            arr[2, 1] = new FieldElement() { HasMine = true };
             arr[2, 2] = new FieldElement();
-            arr[2, 3] = new FieldElement() { hasMine = true };
+            arr[2, 3] = new FieldElement() { HasMine = true };
             arr[2, 4] = new FieldElement();
 
             arr[3, 0] = new FieldElement();
-            arr[3, 1] = new FieldElement() { hasMine = true };
-            arr[3, 2] = new FieldElement() { hasMine = true };
-            arr[3, 3] = new FieldElement() { hasMine = true };
+            arr[3, 1] = new FieldElement() { HasMine = true };
+            arr[3, 2] = new FieldElement() { HasMine = true };
+            arr[3, 3] = new FieldElement() { HasMine = true };
             arr[3, 4] = new FieldElement();
 
             arr[4, 0] = new FieldElement();

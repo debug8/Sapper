@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace model
+﻿namespace model
 {
-    class FieldElement
+    internal class FieldElement
     {
-        public bool hasMine;
-        public bool isOpen;
+        public bool HasMine;
+        public bool IsOpen;
     }
 }
