@@ -18,7 +18,7 @@ namespace View
         public event EventHandler<MineFieldEventArgs> MineButtonRightPressed;
 
         private const int ButtonSize = 16;
-        private readonly byte fieldSize;      
+        private readonly int fieldSize;      
         private FieldButton [,] fieldArray;       
 
         public FieldControl() : this(10)
@@ -26,7 +26,7 @@ namespace View
 
         }
 
-        public FieldControl(byte fieldSize)
+        public FieldControl(int fieldSize)
         {
             this.fieldSize = fieldSize;
             fieldArray = new FieldButton[fieldSize, fieldSize];
@@ -36,11 +36,11 @@ namespace View
             Size = new System.Drawing.Size(ButtonSize * fieldSize, ButtonSize * fieldSize);
         }
 
-        private void FillMineField(byte fieldSize)
+        private void FillMineField(int fieldSize)
         {
-            for (byte i = 0; i < fieldSize; i++)
+            for (int i = 0; i < fieldSize; i++)
             {
-                for (byte j = 0; j < fieldSize; j++)
+                for (int j = 0; j < fieldSize; j++)
                 {
                     var b = new FieldButton(i, j);
                     b.Location = new System.Drawing.Point(ButtonSize * i, ButtonSize * j);

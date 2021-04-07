@@ -10,13 +10,13 @@ namespace View.FieldElement
 {
     internal class FieldButton : Button
     {
-        private byte row, column;
+        private int row, column;
         private const int ButtonSize = 16;
         private FieldElementStatus status;
 
         internal FieldElementStatus Status { get { return status; } }
 
-        internal FieldButton(byte row, byte column)
+        internal FieldButton(int row, int column)
         {
             this.row = row;
             this.column = column;
@@ -90,12 +90,12 @@ namespace View.FieldElement
             base.OnMouseUp(mevent);
         }
 
-        internal byte Row
+        internal int Row
         {
             get { return row; }
         }
 
-        internal byte Column
+        internal int Column
         {
             get { return column; }
         }

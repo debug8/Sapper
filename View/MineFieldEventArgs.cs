@@ -8,16 +8,16 @@ namespace View
 {
     public class MineFieldEventArgs : EventArgs
     {
-        byte row;
-        byte column;
+        int row;
+        int column;
 
-        internal MineFieldEventArgs(byte row, byte column) 
+        internal MineFieldEventArgs(int row, int column) 
         {
             this.row = row;
             this.column = column;
         }
 
-        public byte Row { get { return row; } }
-        public byte Column { get { return column; } }
+        public int Row { get { return row; } }
+        public int Column { get { return column; } }
     }
 }
