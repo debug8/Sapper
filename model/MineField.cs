@@ -4,7 +4,7 @@ namespace model
 {
     public class MineField : IModelMineField 
     {
-        private FieldElement[,] field;
+        private FieldElement[,] _field;
         private int fieldSize;
         private float persentMines;
 
@@ -18,7 +18,7 @@ namespace model
         {
             if (fieldSize < 5 || fieldSize > 100) throw new ArgumentOutOfRangeException("fieldSize", "must be 5 < fieldSize < 100");
             this.fieldSize = fieldSize;
-            field = new FieldElement[fieldSize, fieldSize];
+            _field = new FieldElement[fieldSize, fieldSize];
 
             if (persentMines < 0.01 || persentMines > 0.95) throw new ArgumentOutOfRangeException("persentMines","must be 0.01<persentMines<0.95");
             this.persentMines = persentMines;
@@ -28,12 +28,12 @@ namespace model
         {
             if (row >= fieldSize && column >= fieldSize)   
                 throw new ArgumentOutOfRangeException("row and column can't be more than fieldSize");
-            if (field[row, column] == null) 
+            if (_field[row, column] == null) 
             {
                 InitializeField(row, column);
             }
 
-            if (field[row, column].HasMine)
+            if (_field[row, column].HasMine)
             {
                 OnLoose();
                 return;
@@ -42,7 +42,7 @@ namespace model
             OpenFreeElement(row, column);
 
             bool isWin = true;
-            foreach (var element in field) 
+            foreach (var element in _field) 
             {
                 if (element.HasMine) continue;
                 isWin &= element.IsOpen;
@@ -52,13 +52,13 @@ namespace model
 
         public void Reset()
         {
-            field = new FieldElement[fieldSize, fieldSize];
+            _field = new FieldElement[fieldSize, fieldSize];
         }
 
         private void OpenFreeElement(int row, int column) 
         {
-             if (field[row, column].IsOpen) return;
-            field[row, column].IsOpen = true;
+             if (_field[row, column].IsOpen) return;
+            _field[row, column].IsOpen = true;
 
             var rowMin = row == 0 ? 0 : -1;
             var rowMax = row == fieldSize - 1 ? 0 : 1;
@@ -70,26 +70,26 @@ namespace model
             {
                 for (int j = column + columnMin; j <= column + columnMax; j++)
                 {
-                    if (field[i, j].HasMine) continue;
+                    if (_field[i, j].HasMine) continue;
                     if (MineCountAround(i, j) == 0)
                     {
                         OpenFreeElement(i, j);
                     }
                     else 
                     {                       
-                        if (!field[i, j].IsOpen && ElementChanged != null)
+                        if (!_field[i, j].IsOpen && ElementChanged != null)
                         {
-                            ElementChanged(this, new ElementEventArgs((int)i, (int)j, false, MineCountAround(i, j)));
+                            ElementChanged(this, new ElementEventArgs(i, j, false, MineCountAround(i, j)));
                         }
 
-                      field[i, j].IsOpen = true;
+                      _field[i, j].IsOpen = true;
                     }
                 }
             }
 
             if (ElementChanged != null)
             {
-                ElementChanged(this, new ElementEventArgs((int)row, (int)column, false, MineCountAround(row, column)));
+                ElementChanged(this, new ElementEventArgs(row, column, false, MineCountAround(row, column)));
             }
         }
 
@@ -116,7 +116,7 @@ namespace model
 
         private void OpenMines(int i, int j) 
         {
-            if (field[i, j].HasMine)
+            if (_field[i, j].HasMine)
                 ElementChanged(this, new ElementEventArgs(i, j, true, 0));
         }       
 
@@ -135,7 +135,7 @@ namespace model
                 for (int j = column + columnMin; j <= column + columnMax; j++)
                 {
                     if (i == row && j == column) continue;
-                    if(field[i,j].HasMine) res++;
+                    if(_field[i,j].HasMine) res++;
                 }
             }
             return res;
@@ -143,7 +143,7 @@ namespace model
 
         private void InitializeField(int firstClickRow, int firstClickColumn) 
         {
-            EnumerateArray((i, j) => field[i, j] = new FieldElement());
+            EnumerateArray((i, j) => _field[i, j] = new FieldElement());
 
             SetMines(firstClickRow, firstClickColumn);
         }
@@ -156,12 +156,12 @@ namespace model
             {
                 int x = r.Next(fieldSize);
                 int y = r.Next(fieldSize);
-                if (field[x, y].HasMine || (x==firstClickRow && y==firstClickColumn))
+                if (_field[x, y].HasMine || (x==firstClickRow && y==firstClickColumn))
                 {
                     i--;
                     continue;
                 }
-                field[x, y].HasMine = true;
+                _field[x, y].HasMine = true;
             }
         }
 
