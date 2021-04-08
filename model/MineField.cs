@@ -5,35 +5,45 @@ namespace model
     public class MineField : IModelMineField 
     {
         private FieldElement[,] _field;
-        private int fieldSize;
-        private float persentMines;
+        private readonly int _fieldWidth;
+        private readonly int _fieldHight;
+        private readonly float _persentMines;
 
         public event EventHandler Loose;
         public event EventHandler Win;
         public event EventHandler<ElementEventArgs> ElementChanged;
 
-        public MineField(int fieldSize) : this(fieldSize, 0.15f) { }
+        public MineField(int fieldWidth, int fieldHight) : this(fieldWidth, fieldHight, 0.15f) { }
 
-        public MineField(int fieldSize, float persentMines) 
+        public MineField(int fieldWidth, int fieldHight, float persentMines)
         {
-            if (fieldSize < 5 || fieldSize > 100) throw new ArgumentOutOfRangeException("fieldSize", "must be 5 < fieldSize < 100");
-            this.fieldSize = fieldSize;
-            _field = new FieldElement[fieldSize, fieldSize];
+            if (fieldWidth < 5 || fieldWidth > 100) throw new ArgumentOutOfRangeException("fieldWidth", "must be 5 < fieldSize < 100");
+            _fieldWidth = fieldWidth;
+
+            if (fieldHight < 5 || fieldHight > 100) throw new ArgumentOutOfRangeException("fieldHight", "must be 5 < fieldSize < 100");
+            _fieldHight = fieldHight;
+
+            _field = new FieldElement[_fieldHight, _fieldWidth];
 
             if (persentMines < 0.01 || persentMines > 0.95) throw new ArgumentOutOfRangeException("persentMines","must be 0.01<persentMines<0.95");
-            this.persentMines = persentMines;
+            _persentMines = persentMines;
         }
 
         public void OpenElement(int row, int column)
         {
-            if (row >= fieldSize && column >= fieldSize)   
-                throw new ArgumentOutOfRangeException("row and column can't be more than fieldSize");
+            if (row >= _fieldHight)
+                throw new ArgumentOutOfRangeException("row", "row can't be more than fieldHight");
+
+            if (column >= _fieldWidth)
+                throw new ArgumentOutOfRangeException("column", "column can't be more than fieldWidth");
+
             if (_field[row, column] == null) 
             {
                 InitializeField(row, column);
             }
 
-            if (_field[row, column].HasMine)
+            var fieldElement = _field[row, column];
+            if (fieldElement != null && fieldElement.HasMine)
             {
                 OnLoose();
                 return;
@@ -41,7 +51,7 @@ namespace model
 
             OpenFreeElement(row, column);
 
-            bool isWin = true;
+            var isWin = true;
             foreach (var element in _field) 
             {
                 if (element.HasMine) continue;
@@ -52,7 +62,7 @@ namespace model
 
         public void Reset()
         {
-            _field = new FieldElement[fieldSize, fieldSize];
+            _field = new FieldElement[_fieldHight, _fieldWidth];
         }
 
         private void OpenFreeElement(int row, int column) 
@@ -61,10 +71,10 @@ namespace model
             _field[row, column].IsOpen = true;
 
             var rowMin = row == 0 ? 0 : -1;
-            var rowMax = row == fieldSize - 1 ? 0 : 1;
+            var rowMax = row == _fieldHight - 1 ? 0 : 1;
 
             var columnMin = column == 0 ? 0 : -1;
-            var columnMax = column == fieldSize - 1 ? 0 : 1;
+            var columnMax = column == _fieldWidth - 1 ? 0 : 1;
 
             for (int i = row + rowMin; i <= row + rowMax; i++)
             {
@@ -97,7 +107,7 @@ namespace model
         {
             if (ElementChanged != null)
             {               
-                EnumerateArray(OpenMines);
+                EnumerateFieldArray(OpenMine);
             }
 
             if (Loose != null)
@@ -114,7 +124,7 @@ namespace model
             }
         }
 
-        private void OpenMines(int i, int j) 
+        private void OpenMine(int i, int j) 
         {
             if (_field[i, j].HasMine)
                 ElementChanged(this, new ElementEventArgs(i, j, true, 0));
@@ -122,13 +132,13 @@ namespace model
 
         private int MineCountAround(int row, int column) 
         {   
-            int res = 0;
+            var res = 0;
 
             var rowMin = row == 0 ? 0 : -1;
-            var rowMax = row == fieldSize - 1 ? 0 : 1;
+            var rowMax = row == _fieldHight - 1 ? 0 : 1;
 
             var columnMin = column == 0 ? 0 : -1;
-            var columnMax = column == fieldSize - 1 ? 0 : 1;
+            var columnMax = column == _fieldWidth - 1 ? 0 : 1;
 
             for (int i = row + rowMin; i <= row + rowMax; i++)
             {
@@ -143,33 +153,33 @@ namespace model
 
         private void InitializeField(int firstClickRow, int firstClickColumn) 
         {
-            EnumerateArray((i, j) => _field[i, j] = new FieldElement());
+            EnumerateFieldArray((i, j) => _field[i, j] = new FieldElement());
 
             SetMines(firstClickRow, firstClickColumn);
         }
 
         private void SetMines(int firstClickRow, int firstClickColumn) 
         {
-            int amt = (int)(fieldSize * fieldSize * persentMines);
-            Random r = new Random();
-            for (int i = 0; i < amt; i++)
+            var amt = (int)(_fieldHight * _fieldWidth * _persentMines);
+            var r = new Random();
+            for (var i = 0; i < amt; i++)
             {
-                int x = r.Next(fieldSize);
-                int y = r.Next(fieldSize);
-                if (_field[x, y].HasMine || (x==firstClickRow && y==firstClickColumn))
+                var x = r.Next(_fieldWidth);
+                var y = r.Next(_fieldHight);
+                if (_field[y, x].HasMine || (x==firstClickRow && y==firstClickColumn))
                 {
                     i--;
                     continue;
                 }
-                _field[x, y].HasMine = true;
+                _field[y, x].HasMine = true;
             }
         }
 
-        private void EnumerateArray(Action<int, int> action) 
+        private void EnumerateFieldArray(Action<int, int> action) 
         {
-            for (int i = 0; i < fieldSize; i++)
+            for (int i = 0; i < _fieldHight; i++)
             {
-                for (int j = 0; j < fieldSize; j++)
+                for (int j = 0; j < _fieldWidth; j++)
                 {
                     action(i, j);
                 }

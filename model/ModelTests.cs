@@ -8,18 +8,21 @@ namespace model
         [TestMethod]
         public void MinesArowndTest() 
         {
-            var model = new MineField(2);
+            var model = new MineField(20,20);
             var obj = new PrivateObject(model);
 
-            obj.SetField("field", CreateTestArray0Mine());
+            obj.SetField("_fieldWidth", 2);
+            obj.SetField("_fieldHight", 2);
+
+            obj.SetField("_field", CreateTestArray0Mine());
             var mine = obj.Invoke("MineCountAround", new object[]{0, 0});
             Assert.AreEqual(0, (int)mine);
 
-            obj.SetField("field", CreateTestArray3Mine());
+            obj.SetField("_field", CreateTestArray3Mine());
             mine = obj.Invoke("MineCountAround", new object[] { 0, 0 });
             Assert.AreEqual(3, (int)mine);
 
-            obj.SetField("field", CreateTestArray3MineApper());
+            obj.SetField("_field", CreateTestArray3MineApper());
             mine = obj.Invoke("MineCountAround", new object[] { 1, 1 });
             Assert.AreEqual(3, (int)mine);
         }
@@ -27,10 +30,10 @@ namespace model
         [TestMethod]
         public void MinesArowndBigTest() 
         {
-            var model = new MineField(5);
+            var model = new MineField(5,5);
             var obj = new PrivateObject(model);
 
-            obj.SetField("field", CreateBigTestArray());
+            obj.SetField("_field", CreateBigTestArray());
             var mine = obj.Invoke("MineCountAround", new object[] { 2, 2 });
             Assert.AreEqual(8, (int)mine);
 

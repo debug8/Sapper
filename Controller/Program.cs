@@ -16,7 +16,7 @@ namespace Controller
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            IModelMineField model = new MineField(10);
+            IModelMineField model = new MineField(10, 10);
             var view = new MainForm();
 
             var controller = new Controller(view, model);
