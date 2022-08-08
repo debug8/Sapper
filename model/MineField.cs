@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace model
 {
@@ -13,7 +14,7 @@ namespace model
         public event EventHandler Win;
         public event EventHandler<ElementEventArgs> ElementChanged;
 
-        public MineField(int fieldWidth, int fieldHight) : this(fieldWidth, fieldHight, 0.15f) { }
+        public MineField(int fieldWidth, int fieldHight) : this(fieldWidth, fieldHight, 0.1f) { }
 
         public MineField(int fieldWidth, int fieldHight, float persentMines)
         {
@@ -48,6 +49,7 @@ namespace model
                 OnLoose();
                 return;
             }
+
 
             OpenFreeElement(row, column);
 
@@ -166,7 +168,12 @@ namespace model
             {
                 var x = r.Next(_fieldWidth);
                 var y = r.Next(_fieldHight);
-                if (_field[y, x].HasMine || (x==firstClickRow && y==firstClickColumn))
+                if (_field[y, x].HasMine)
+                {
+                    i--;
+                    continue;
+                }
+                if ((y == firstClickRow && x == firstClickColumn))
                 {
                     i--;
                     continue;

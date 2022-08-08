@@ -19,6 +19,7 @@ namespace Controller
             InitializeComponent();
             fieldControl.MineButtonPressed += OnMineButtonPressed;
             fieldControl.MineButtonRightPressed += OnMineButtonRightPressed;
+            this.Size = new Size(fieldControl.Size.Width + 35, fieldControl.Size.Height);
         }
 
 

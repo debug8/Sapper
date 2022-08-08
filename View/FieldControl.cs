@@ -1,49 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 using View.FieldElement;
 
 namespace View
 {
-    public partial class FieldControl : UserControl, View.IViewMineField
+    public partial class FieldControl : UserControl, IViewMineField
     {
         public event EventHandler<MineFieldEventArgs> MineButtonPressed;
         public event EventHandler<MineFieldEventArgs> MineButtonRightPressed;
 
         private const int ButtonSize = 16;
-        private readonly int fieldSize;      
-        private FieldButton [,] fieldArray;       
+        private readonly int _fieldHight;
+        private readonly int _fieldWidth;
+        private FieldButton [,] _fieldArray;       
 
-        public FieldControl() : this(10)
+        public FieldControl() : this(20, 50)
         {
 
         }
 
-        public FieldControl(int fieldSize)
+        public FieldControl(int fieldHight, int fieldWidth)
         {
-            this.fieldSize = fieldSize;
-            fieldArray = new FieldButton[fieldSize, fieldSize];
+            _fieldHight = fieldHight;
+            _fieldWidth = fieldWidth;
+
+            _fieldArray = new FieldButton[fieldHight, fieldWidth];
             InitializeComponent();
 
-            FillMineField(fieldSize);
-            Size = new System.Drawing.Size(ButtonSize * fieldSize, ButtonSize * fieldSize);
+            FillMineField(fieldHight, fieldWidth);
+            Size = new System.Drawing.Size(ButtonSize * fieldWidth, ButtonSize * fieldHight);
         }
 
-        private void FillMineField(int fieldSize)
+        private void FillMineField(int fieldHight, int fieldWidth)
         {
-            for (int i = 0; i < fieldSize; i++)
+            for (int i = 0; i < fieldHight; i++)
             {
-                for (int j = 0; j < fieldSize; j++)
+                for (int j = 0; j < fieldWidth; j++)
                 {
                     var b = new FieldButton(i, j);
-                    b.Location = new System.Drawing.Point(ButtonSize * i, ButtonSize * j);
+                    b.Location = new System.Drawing.Point(ButtonSize * j, ButtonSize * i);
                     b.Click += b_Click;
                     b.MouseDown += b_MouseDown;
                     this.Controls.Add(b);
@@ -75,10 +72,12 @@ namespace View
         }
 
         public void SetElementStatus(int row, int column, FieldElementStatus status)
-        {
+        {           
             var element = Controls.OfType<FieldButton>().Where(b => b.Row == row && b.Column == column).First();
 
             element.SetStatus(status);
+            Thread.Sleep(10);
+            element.Refresh();
         }
 
         public FieldElementStatus GetElementStatus(int row, int column)

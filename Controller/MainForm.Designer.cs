@@ -65,19 +65,16 @@ namespace Controller
             // 
             this.fieldControl.Location = new System.Drawing.Point(12, 31);
             this.fieldControl.Name = "fieldControl";
-            this.fieldControl.Size = new System.Drawing.Size(358, 310);
+            this.fieldControl.Size = new System.Drawing.Size(800, 320);
             this.fieldControl.TabIndex = 0;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(382, 353);
             this.Controls.Add(this.fieldControl);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(400, 400);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "MainForm";

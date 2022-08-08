@@ -99,6 +99,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FieldControl.resx">
+      <DependentUpon>FieldControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FieldElement\FieldButtonResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FieldButtonResources.Designer.cs</LastGenOutput>
